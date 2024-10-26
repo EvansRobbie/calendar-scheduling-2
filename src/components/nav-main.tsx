@@ -12,6 +12,9 @@ import {
   SidebarMenuSubButton,
   SidebarMenuSubItem,
 } from '@/components/ui/sidebar';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { cn } from '@/lib/utils';
 
 export function NavMain({
   items,
@@ -24,9 +27,11 @@ export function NavMain({
     items?: {
       title: string;
       url: string;
+      icon: LucideIcon;
     }[];
   }[];
 }) {
+  const pathname = usePathname()
   return (
     <SidebarGroup>
       <SidebarMenu>
@@ -40,10 +45,11 @@ export function NavMain({
             <SidebarMenuSub>
               {item.items?.map((subItem) => (
                 <SidebarMenuSubItem key={subItem.title}>
-                  <SidebarMenuSubButton asChild>
-                    <a href={subItem.url}>
+                  <SidebarMenuSubButton asChild className={cn('flex gap-2 group text-muted-foreground hover:!text-foreground', pathname === subItem.url && '!text-primary !bg-primary/10 transition-all transform')}>
+                    <Link href={subItem.url} >
+                      <subItem.icon className={cn('shrink-0 group-hover:stroke-foreground !stroke-muted-foreground', pathname === subItem.url && '!stroke-primary')} size={16} />
                       <span>{subItem.title}</span>
-                    </a>
+                    </Link>
                   </SidebarMenuSubButton>
                 </SidebarMenuSubItem>
               ))}

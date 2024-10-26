@@ -1,6 +1,6 @@
 'use client';
 
-import { SquareTerminal } from 'lucide-react';
+import { CalendarCheck, HomeIcon, Settings, SquareTerminal, User2 } from 'lucide-react';
 import * as React from 'react';
 
 import { NavMain } from '@/components/nav-main';
@@ -29,16 +29,24 @@ const data = {
       isActive: true,
       items: [
         {
-          title: 'History',
-          url: '#',
+          title: 'Event Types',
+          url: '/dashboard',
+          icon:HomeIcon
         },
         {
-          title: 'Starred',
-          url: '#',
+          title: 'Meetings',
+          url: '/dashboard/meetings',
+          icon:User2
+        },
+        {
+          title: 'Availability',
+          url: '/dashboard/availability',
+          icon:CalendarCheck
         },
         {
           title: 'Settings',
-          url: '#',
+          url: '/dashboard/settings',
+          icon:Settings
         },
       ],
     },
