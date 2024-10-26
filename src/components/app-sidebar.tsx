@@ -1,6 +1,13 @@
 'use client';
+import { type User } from 'next-auth';
 
-import { CalendarCheck, HomeIcon, Settings, SquareTerminal, User2 } from 'lucide-react';
+import {
+  CalendarCheck,
+  HomeIcon,
+  Settings,
+  SquareTerminal,
+  User2,
+} from 'lucide-react';
 import * as React from 'react';
 
 import { NavMain } from '@/components/nav-main';
@@ -13,6 +20,10 @@ import {
   SidebarRail,
 } from '@/components/ui/sidebar';
 import { CalLogo } from './cal-logo';
+interface AppSidebarProps {
+  user?: User | undefined;
+  // Other props...
+}
 
 // This is sample data.
 const data = {
@@ -31,29 +42,34 @@ const data = {
         {
           title: 'Event Types',
           url: '/dashboard',
-          icon:HomeIcon
+          icon: HomeIcon,
         },
         {
           title: 'Meetings',
           url: '/dashboard/meetings',
-          icon:User2
+          icon: User2,
         },
         {
           title: 'Availability',
           url: '/dashboard/availability',
-          icon:CalendarCheck
+          icon: CalendarCheck,
         },
         {
           title: 'Settings',
           url: '/dashboard/settings',
-          icon:Settings
+          icon: Settings,
         },
       ],
     },
   ],
 };
 
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+export const AppSidebar: React.FC<AppSidebarProps> = ({
+  user,
+  ...props
+}) => {
+
+
   return (
     <Sidebar collapsible='icon' {...props}>
       <SidebarHeader>
@@ -63,9 +79,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <NavMain items={data.navMain} />
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={data.user} />
+        <NavUser user={user} />
       </SidebarFooter>
       <SidebarRail />
     </Sidebar>
   );
-}
+};
