@@ -10,12 +10,14 @@ import {
 import { Separator } from '@/components/ui/separator';
 import { SidebarTrigger } from '@/components/ui/sidebar';
 import Link from 'next/link';
-import { useParams } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import { ThemeToggle } from '../shared/theme-toggle';
 
 const TopNav = () => {
-  const params = useParams();
+  const pathname = usePathname();
+  const params = pathname.split('/').filter(Boolean);
   console.log(params);
+
   return (
     <header className='flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-[[data-collapsible=icon]]/sidebar-wrapper:h-12 justify-between pr-6 w-full'>
       <div className='flex items-center gap-2 px-4'>
@@ -28,18 +30,18 @@ const TopNav = () => {
                 <Link href='/dashboard'>Dashboard</Link>
               </BreadcrumbLink>
             </BreadcrumbItem>
-            {params.tabs && (
+            {params.length > 1 && (
               <>
                 <BreadcrumbSeparator className='hidden md:block' />
                 <BreadcrumbItem>
-                  <BreadcrumbPage>Data Fetching</BreadcrumbPage>
+                  <BreadcrumbPage>{params[1]}</BreadcrumbPage>
                 </BreadcrumbItem>
               </>
             )}
           </BreadcrumbList>
         </Breadcrumb>
       </div>
-      <ThemeToggle/>
+      <ThemeToggle />
     </header>
   );
 };

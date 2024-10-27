@@ -1,7 +1,7 @@
 import { requireUser } from '@/_helpers/helper';
 import { getCalendarEvents } from '@/_services/google-calendar';
 import prisma from '@/lib/db';
-import { addMonths, endOfDay, roundToNearestMinutes } from 'date-fns';
+import { addMonths, eachMinuteOfInterval, endOfDay, roundToNearestMinutes } from 'date-fns';
 import { redirect } from 'next/navigation';
 
 async function getData(userId: string) {
@@ -22,14 +22,11 @@ export default async function Page() {
   const session = await requireUser();
   await getData(session.user?.id as string);
   const startDate = roundToNearestMinutes(new Date(), { nearestTo: 15, roundingMethod: 'ceil' });
-  const endDate = endOfDay(addMonths(startDate, 2));
-  console.log(session)
+  // const endDate = endOfDay(addMonths(startDate, 2));
+  // console.log(session)
 
-  const validTimes = await getCalendarEvents({
-    start: startDate,
-    end: endDate,
-  });
-  console.log(validTimes);
+  // const validTimes = await getValidTimesFromSchedule(eachMinuteOfInterval({ start: startDate, end: endDate }, {step: 15}),event)
+  // console.log(validTimes);
 
   return (
     <div className='flex flex-1 flex-col gap-4 p-4 pt-0'>
