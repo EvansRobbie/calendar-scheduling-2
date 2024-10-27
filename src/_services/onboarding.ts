@@ -35,6 +35,47 @@ export const onboardingAction = async (
     data: {
       userName: submission.value.userName,
       name: submission.value.fullName,
+      availability: {
+        createMany: {
+          data: [
+            {
+              day: 'Monday',
+              fromTime: '08:00',
+              tillTime: '18:00',
+            },
+            {
+              day: 'Tuesday',
+              fromTime: '08:00',
+              tillTime: '18:00',
+            },
+            {
+              day: 'Wednesday',
+              fromTime: '08:00',
+              tillTime: '18:00',
+            },
+            {
+              day: 'Thursday',
+              fromTime: '08:00',
+              tillTime: '18:00',
+            },
+            {
+              day: 'Friday',
+              fromTime: '08:00',
+              tillTime: '18:00',
+            },
+            {
+              day: 'Saturday',
+              fromTime: '08:00',
+              tillTime: '18:00',
+            },
+            {
+              day: 'Sunday',
+              fromTime: '08:00',
+              tillTime: '18:00',
+            },
+          ],
+        },
+      },
     },
   });
   return redirect('/dashboard');
