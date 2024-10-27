@@ -1,11 +1,11 @@
 'use client';
-import { useFormStatus } from 'react-dom';
-import { Button, buttonVariants } from '../ui/button';
-import GoogleLogo from '../../../public/google.svg';
-import GithubLogo from '../../../public/github.svg';
-import Image from 'next/image';
-import { Loader2, LogOut } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { Loader2, LogOut } from 'lucide-react';
+import Image from 'next/image';
+import { useFormStatus } from 'react-dom';
+import GithubLogo from '../../../public/github.svg';
+import GoogleLogo from '../../../public/google.svg';
+import { Button } from '../ui/button';
 
 export const GoogleButton = () => {
   const { pending } = useFormStatus();
@@ -77,7 +77,7 @@ export const SubmitButton = ({
   return (
     <>
       {pending ? (
-        <Button disabled variant={'outline'}  className={cn('w-fit', className)}>
+        <Button disabled variant={'outline'} className={cn('w-fit', className)}>
           <Loader2 className='animate-spin mr-2 size-4' /> Please wait ...
         </Button>
       ) : (

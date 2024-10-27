@@ -16,7 +16,7 @@ import { useForm } from '@conform-to/react';
 import { parseWithZod } from '@conform-to/zod';
 import { useFormState } from 'react-dom';
 
-const onboardingPage = () => {
+const OnboardingPage = () => {
   const [lastResult, action] = useFormState(onboardingAction, undefined); // react 19 useActionState
 
   const [form, fields] = useForm({
@@ -29,6 +29,7 @@ const onboardingPage = () => {
     shouldValidate: 'onBlur',
     shouldRevalidate: 'onInput',
   });
+
   return (
     <div className=' min-h-screen w-full flex items-center justify-center'>
       <Card>
@@ -83,4 +84,4 @@ const onboardingPage = () => {
   );
 };
 
-export default onboardingPage;
+export default OnboardingPage;

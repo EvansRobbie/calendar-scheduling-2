@@ -2,11 +2,14 @@
 
 import { requireUser } from '@/_helpers/helper';
 import prisma from '@/lib/db';
-import { onboardingSchema, onboardingSchemaValidation } from '@/lib/zodSchemas';
+import { onboardingSchemaValidation } from '@/lib/zodSchemas';
 import { parseWithZod } from '@conform-to/zod';
 import { redirect } from 'next/navigation';
 
-export const onboardingAction = async (prevState: any, formData: FormData) => {
+export const onboardingAction = async (
+  prevState: unknown,
+  formData: FormData
+) => {
   const session = await requireUser();
   console.log(session);
   const submission = await parseWithZod(formData, {
@@ -25,7 +28,7 @@ export const onboardingAction = async (prevState: any, formData: FormData) => {
   if (submission.status !== 'success') {
     return submission.reply();
   }
-  const data = await prisma.user.update({
+  await prisma.user.update({
     where: {
       id: session.user?.id,
     },
